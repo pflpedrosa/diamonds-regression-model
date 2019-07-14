@@ -190,29 +190,29 @@ print(clarity_means.reset_index().sort_values(['price']).set_index(['clarity']))
 
 # Integer encoding
 cut_obj = {'Ideal': 3463, 
-       'Good': 3871, 
-       'Very Good': 3946, 
-       'Fair': 4368, 
-       'Premium': 4571
+           'Good': 3871, 
+           'Very Good': 3946, 
+           'Fair': 4368, 
+           'Premium': 4571
 }
 
 color_obj = {'E': 3096, 
-         'D': 3227, 
-         'F': 3696, 
-         'G': 4008, 
-         'H': 4410, 
-         'I': 5058, 
-         'J': 5243
+             'D': 3227, 
+             'F': 3696, 
+             'G': 4008, 
+             'H': 4410, 
+             'I': 5058, 
+             'J': 5243
 }
 
 clarity_obj = {'VVS1': 2559, 
-           'IF': 2887, 
-           'VVS2': 3257, 
-           'VS1': 3826, 
-           'VS2': 3892,
-           'I1': 3966, 
-           'SI1': 3971, 
-           'SI2': 5087
+               'IF': 2887, 
+               'VVS2': 3257, 
+               'VS1': 3826, 
+               'VS2': 3892,
+               'I1': 3966, 
+               'SI1': 3971, 
+               'SI2': 5087
 }
 
 ds['cut'] = ds['cut'].replace(cut_obj, inplace = False)
@@ -692,29 +692,29 @@ ds = ds.set_index('id')
 x_kaggle = x_kaggle.set_index('id')
 
 cut_obj = {'Ideal': 3463, 
-       'Good': 3871, 
-       'Very Good': 3946, 
-       'Fair': 4368, 
-       'Premium': 4571
+           'Good': 3871, 
+           'Very Good': 3946, 
+           'Fair': 4368, 
+           'Premium': 4571
 }
 
 color_obj = {'E': 3096, 
-         'D': 3227, 
-         'F': 3696, 
-         'G': 4008, 
-         'H': 4410, 
-         'I': 5058, 
-         'J': 5243
+             'D': 3227, 
+             'F': 3696, 
+             'G': 4008, 
+             'H': 4410, 
+             'I': 5058, 
+             'J': 5243
 }
 
 clarity_obj = {'VVS1': 2559, 
-           'IF': 2887, 
-           'VVS2': 3257, 
-           'VS1': 3826, 
-           'VS2': 3892,
-           'I1': 3966, 
-           'SI1': 3971, 
-           'SI2': 5087
+               'IF': 2887, 
+               'VVS2': 3257, 
+               'VS1': 3826, 
+               'VS2': 3892,
+               'I1': 3966, 
+               'SI1': 3971, 
+               'SI2': 5087
 }
 
 ds['cut'] = ds['cut'].replace(cut_obj, inplace = False)
@@ -745,7 +745,7 @@ rfr = RandomForestRegressor(n_estimators = 2000,
 rfr.fit(x, y)
 y_kaggle = rfr.predict(x_kaggle)
 submission = pd.DataFrame({'id':x_kaggle.index, 'price':y_kaggle})
-submission.to_csv('submission_rf.csv', index = False)
+submission.to_csv('submissions/submission_rf.csv', index = False)
 
 # GradientBoosting com erro minimizado - primeira escolha
 # Kaggle score público: 0.08785
@@ -761,19 +761,19 @@ gbr = GradientBoostingRegressor(n_estimators = 2500,
 gbr.fit(x, y)
 y_kaggle = gbr.predict(x_kaggle)
 submission = pd.DataFrame({'id':x_kaggle.index, 'price':y_kaggle})
-submission.to_csv('submission_gb.csv', index = False)
+submission.to_csv('submissions/submission_gb.csv', index = False)
 
 # XGBoost com erro minimizado - segunda escolha
 # Kaggle score público: 0.08791
 # Kaggle score privado: 0.09134
 xgbr = XGBRegressor(n_estimators = 2200,
-                   learning_rate = 0.011,
-                   max_depth = 10,
-                   nthread = 8,
-                   seed = 77
+                    learning_rate = 0.011,
+                    max_depth = 10,
+                    nthread = 8,
+                    seed = 77
 )
 xgbr.fit(x, y)
 y_kaggle = xgbr.predict(x_kaggle)
 submission = pd.DataFrame({'id':x_kaggle.index, 'price':y_kaggle})
-submission.to_csv('submission_xgb.csv', index = False)
+submission.to_csv('submissions/submission_xgb.csv', index = False)
 
